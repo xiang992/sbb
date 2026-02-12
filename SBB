@@ -1,0 +1,260 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronDown, Heart, Camera, MapPin, Sparkles, GraduationCap, Music, Users, MessageCircle, Play, Navigation, Home, Sunrise } from 'lucide-react';
+
+const App = () => {
+  const [showLogo, setShowLogo] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+
+  // 雲科配色
+  const colors = {
+    yuntechGreen: '#6DC1B5',
+    yuntechPurple: '#B55AAB',
+    softGreen: '#AEE1D9',
+    softPurple: '#D8A6D1',
+    bgWhite: '#FFFFFF',
+    textDark: '#333333',
+    grayLight: '#F8F9FA'
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLogo(false), 2500);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    
+    // 加載 Instagram 嵌入腳本
+    const script = document.createElement('script');
+    script.src = "//www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const timelineData = [
+    {
+      year: "2021 | Freshman",
+      id: "freshman",
+      title: "二十個人的純粹天真",
+      desc: "那時候雲林好安靜，但我們好吵。家樂福可以逛到半夜，跑山可以衝到日出。宿舍裡永遠擠滿了人，哪怕只是叫個外送一起吃，也能笑到沒力氣。沒有目的地，只要聚在一起，連呼吸都是自由的。",
+      details: "熱血看日出、宿舍群聚、山路耍廢、深夜跑山、走廊搞笑、宿舍烤肉、家樂福探險。",
+      icon: <Sparkles className="w-6 h-6" />,
+      color: colors.yuntechGreen,
+      embedUrls: [
+        "https://www.instagram.com/reel/CmIbm_3D6wu/", // 看日出
+        "https://www.instagram.com/reel/CrNtsbzuawy/", // 宿舍生活
+        "https://www.instagram.com/reel/CmHQFBUDVNO/", // 跑山耍白癡
+        "https://www.instagram.com/reel/CtwpoGMN_Mk/", // 跑山
+        "https://www.instagram.com/reel/Co2cwWADcbh/", // 烤肉
+        "https://www.instagram.com/reel/CmHTNvEDDfa/"  // 耍白癡
+      ],
+      tags: ["#日出", "#肝硬化小隊", "#熱血", "#雲科大一", "#SBB斜咖"]
+    },
+    {
+      year: "2022 | Sophomore",
+      id: "sophomore",
+      title: "環島、晚會與忙碌的開始",
+      desc: "大家接了系學會，辦了制服晚會，還一起衝去南投跨年。生活變忙了，但心還是野的。那次環島，我們在風裡雨裡交換著笑容。跨年夜的烤肉火光，映照著我們想永遠在一起的願望，那是屬於我們大二的巔峰。",
+      details: "熱血環島、系學會、制服晚會、南投跨年烤肉、打工生活、依然念舊。",
+      icon: <Navigation className="w-6 h-6" />,
+      color: colors.softGreen,
+      embedUrls: [
+        "https://www.instagram.com/reel/Cyi7mFGycX3/", // 制服晚會
+        "https://www.instagram.com/reel/C2AVy81S7zy/", // 跨年烤肉 (New!)
+        "https://www.instagram.com/reel/Cow1FajjTKP/"  // 環島
+      ],
+      tags: ["#機車環島", "#制服晚會", "#南投跨年", "#跨年烤肉"]
+    },
+    {
+      year: "2023 | Junior",
+      id: "junior",
+      title: "在各自的航道上努力",
+      desc: "實驗室的白光、研究所的壓力。大家開始各奔東西，在感興趣的地方努力。雖然交集少了，但那是為了成為更好的自己。",
+      details: "實驗室生活、面對未來壓力、打工、各奔東西、默默努力。",
+      icon: <MapPin className="w-6 h-6" />,
+      color: colors.softPurple,
+      tags: ["#實驗室", "#研究所準備", "#充實的一年"]
+    },
+    {
+      year: "2024 | Senior",
+      id: "senior",
+      title: "珍重再見，最熟悉的陌生人",
+      desc: "隔閡或許產生了，原本的無話不談變得些許沈默。我們好像變陌生了，但這份四年回憶，是生命中永遠無法遺忘的底色。",
+      details: "畢業季、撥穗、最後的沈默、最深的回憶、未完待續。",
+      icon: <GraduationCap className="w-6 h-6" />,
+      color: colors.yuntechPurple,
+      tags: ["#畢業紀念", "#生命過客", "#永遠的朋友"]
+    }
+  ];
+
+  if (showLogo) {
+    return (
+      <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
+        <div className="relative">
+          <svg width="160" height="160" viewBox="0 0 100 100" className="animate-pulse">
+            <circle cx="50" cy="50" r="45" fill="none" stroke={colors.yuntechGreen} strokeWidth="2" />
+            <text x="50" y="55" fontSize="12" textAnchor="middle" fill={colors.yuntechGreen} fontWeight="bold" letterSpacing="2">
+              SBBXIEKA
+            </text>
+          </svg>
+        </div>
+        <p className="mt-8 text-sm tracking-[0.3em] text-gray-300 font-light uppercase">Recalling 2021-2025</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white selection:bg-[#AEE1D9] selection:text-white">
+      {/* Navigation */}
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-500 px-8 py-6 flex justify-between items-center ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-4' : 'bg-transparent'}`}>
+        <span className="font-bold tracking-tighter text-xl" style={{ color: colors.yuntechGreen }}>sbb.</span>
+        <div className="flex gap-6 text-[10px] tracking-[0.2em] font-bold uppercase text-gray-400">
+          <span className="cursor-default">Yuntech</span>
+          <span className="cursor-default">2021-2025</span>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#6DC1B5]/10 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#B55AAB]/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        
+        <div className="relative text-center z-10">
+          <div className="mb-10 inline-block px-4 py-1 border border-gray-100 rounded-full text-[10px] tracking-[0.2em] uppercase text-gray-300">
+            A Journey of Four Years
+          </div>
+          <h1 className="text-6xl md:text-8xl font-bold mb-8 tracking-tighter leading-none">
+            25% <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r" style={{ backgroundImage: `linear-gradient(to right, ${colors.yuntechGreen}, ${colors.yuntechPurple})` }}>
+              Youth Memories
+            </span>
+          </h1>
+          <p className="max-w-lg mx-auto text-gray-400 leading-relaxed text-sm md:text-base font-light">
+            從雲科的清晨到深夜，從一群人的狂熱到各自的淡然。<br/>
+            這不只是網頁，是我們曾經並肩走過的證言。
+          </p>
+          <div className="mt-16 animate-bounce">
+            <ChevronDown className="w-6 h-6 text-gray-200 mx-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Narrative */}
+      <section className="py-20 max-w-6xl mx-auto px-6">
+        {timelineData.map((item, index) => (
+          <div key={index} className={`mb-48 flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start gap-12 lg:gap-20`}>
+            
+            {/* Visual Part (Grid for Videos) */}
+            <div className="w-full lg:w-3/5">
+              <div className={`grid gap-4 ${item.embedUrls && item.embedUrls.length > 1 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2' : 'grid-cols-1'}`}>
+                {item.embedUrls ? (
+                  item.embedUrls.map((url, urlIdx) => (
+                    <div key={urlIdx} className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 p-1">
+                      <div className="aspect-[9/16] bg-gray-50 overflow-y-auto custom-scrollbar rounded-xl relative">
+                        <div className="absolute inset-0 flex items-center justify-center text-gray-100 pointer-events-none">
+                          <Play className="w-12 h-12" />
+                        </div>
+                        <blockquote 
+                          className="instagram-media w-full" 
+                          data-instgrm-permalink={`${url}?utm_source=ig_embed&amp;utm_campaign=loading`}
+                          data-instgrm-version="14"
+                          style={{ margin: 0, padding: 0, width: '100%' }}
+                        ></blockquote>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="aspect-video bg-gray-50 rounded-2xl border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-300 space-y-2">
+                    <Camera className="w-8 h-8 opacity-50" />
+                    <p className="text-[10px] tracking-widest uppercase">Waiting for more memories...</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Content Part */}
+            <div className="w-full lg:w-2/5 lg:sticky lg:top-32 space-y-8">
+              <div 
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg transform -rotate-3 hover:rotate-0 transition-transform"
+                style={{ backgroundColor: item.color }}
+              >
+                {item.icon}
+              </div>
+              <div className="space-y-3">
+                <p className="text-xs font-black tracking-[0.4em] uppercase" style={{ color: item.color }}>{item.year}</p>
+                <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 leading-tight">{item.title}</h3>
+              </div>
+              <p className="text-gray-500 leading-relaxed text-lg font-light">
+                {item.desc}
+              </p>
+              <div className="p-5 bg-zinc-50/50 rounded-2xl border-l-4 border-dashed" style={{ borderColor: item.color }}>
+                <p className="text-sm text-gray-600 italic font-serif leading-loose">
+                  「{item.details}」
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4">
+                {item.tags.map((tag, i) => (
+                  <span key={i} className="text-[10px] uppercase tracking-widest font-bold px-4 py-2 rounded-full bg-white text-gray-400 border border-gray-100 shadow-sm hover:border-[#6DC1B5] hover:text-[#6DC1B5] transition-colors cursor-default">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* The Ending */}
+      <section className="py-40 bg-zinc-50/30 relative overflow-hidden">
+        <div className="max-w-3xl mx-auto px-8 text-center relative z-10">
+          <Heart className="w-10 h-10 mx-auto mb-12 text-red-200 animate-pulse" />
+          <h2 className="text-4xl font-bold mb-8 tracking-tight text-zinc-800">致 那些曾是生命中的重要過客</h2>
+          <p className="text-gray-400 leading-loose mb-16 text-lg font-light">
+            大學四年，我們從一群人的狂熱，走到最後的淡然。<br/>
+            雖然現在的生活不再重疊，甚至多了些陌生的氣息，<br/>
+            但請別忘記，在那些深夜的跑山、熱氣騰騰的烤肉、宿舍裡的打鬧、還有風塵僕僕環島的瞬間，<br/>
+            我們是真的、真的很要好過。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button 
+              className="px-12 py-4 rounded-full text-white text-[10px] font-black tracking-[0.3em] uppercase hover:shadow-2xl hover:-translate-y-1 transition-all"
+              style={{ backgroundColor: colors.yuntechPurple }}
+            >
+              留下想對大家說的話
+            </button>
+            <button className="flex items-center gap-2 text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 hover:text-gray-600 transition-colors">
+              <MessageCircle className="w-4 h-4" /> 查看大家的留言
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 text-center border-t border-gray-50 bg-white">
+        <p className="text-[10px] tracking-[0.5em] text-gray-300 uppercase font-medium">
+          Yuntech Memories 2021-2025 <br/>
+          <span className="mt-2 block opacity-50">Designed for SBBXIEKA</span>
+        </p>
+      </footer>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6DC1B5; }
+      `}} />
+    </div>
+  );
+};
+
+export default App;
